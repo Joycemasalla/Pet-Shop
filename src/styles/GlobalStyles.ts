@@ -11,6 +11,9 @@ export const GlobalStyles = createGlobalStyle`
   html {
     font-size: 16px;
     scroll-behavior: smooth;
+      overflow-x: hidden;
+      max-width: 100vw;
+
   }
 
   body {
@@ -19,6 +22,8 @@ export const GlobalStyles = createGlobalStyle`
     color: ${theme.colors.gray[800]};
     line-height: ${theme.lineHeights.normal};
     min-height: 100vh;
+     overflow-x: hidden;
+      max-width: 100vw;
   }
 
   body, button, input, select, textarea {
