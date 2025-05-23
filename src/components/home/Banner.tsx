@@ -15,7 +15,7 @@ interface Banner {
 const banners: Banner[] = [
   {
     id: 1,
-    image: 'https://images.pexels.com/photos/7210356/pexels-photo-7210356.jpeg',
+    image: 'https://images.unsplash.com/photo-1669837879174-012c556971e6?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     title: 'Cuidado completo para seu melhor amigo',
     subtitle: 'Produtos de qualidade e atendimento veterinário especializado',
     ctaText: 'Ver Produtos',
@@ -23,7 +23,7 @@ const banners: Banner[] = [
   },
   {
     id: 2,
-    image: 'https://images.pexels.com/photos/6568851/pexels-photo-6568851.jpeg',
+    image: 'https://images.unsplash.com/photo-1733783506192-653df6185a7d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     title: 'Serviços veterinários profissionais',
     subtitle: 'Consultas, vacinas, exames e muito mais para a saúde do seu pet',
     ctaText: 'Agendar Consulta',
@@ -31,7 +31,7 @@ const banners: Banner[] = [
   },
   {
     id: 3,
-    image: 'https://images.pexels.com/photos/6131645/pexels-photo-6131645.jpeg',
+    image: 'https://images.unsplash.com/photo-1647002380351-ba23ff97c428?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     title: 'Banho & Tosa com carinho',
     subtitle: 'Seu pet limpo, cheiroso e feliz com profissionais qualificados',
     ctaText: 'Agendar Serviço',
@@ -121,6 +121,10 @@ const BannerTitle = styled.h1`
   font-weight: ${props => props.theme.fontWeights.bold};
   margin-bottom: ${props => props.theme.spacing[2]};
   animation: ${slideUp} 0.8s ease;
+  color: #d6d6d6; 
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+  margin-bottom: 1rem;
+  animation: ${slideUp} 0.8s ease;  
   
   @media (min-width: ${props => props.theme.breakpoints.md}) {
     font-size: ${props => props.theme.fontSizes['4xl']};
@@ -144,6 +148,12 @@ const BannerSubtitle = styled.p`
 
 const BannerButton = styled(Button)`
   animation: ${slideUp} 0.8s ease 0.4s both;
+  color: black;
+  background-color: white;
+  padding: ${props => props.theme.spacing[2]} ${props => props.theme.spacing[4]};
+  font-size: ${props => props.theme.fontSizes.base};
+  text-decoration: none;
+  text-align: center;
 `;
 
 const NavButton = styled.button<{ direction: 'left' | 'right' }>`
@@ -188,7 +198,7 @@ const Indicator = styled.button<{ isActive: boolean }>`
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: ${props => 
+  background-color: ${props =>
     props.isActive ? props.theme.colors.white : 'rgba(255, 255, 255, 0.5)'};
   border: none;
   cursor: pointer;
@@ -202,28 +212,28 @@ const Indicator = styled.button<{ isActive: boolean }>`
 
 const Banner: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  
+
   const goToPrevious = () => {
-    setActiveIndex(prevIndex => 
+    setActiveIndex(prevIndex =>
       prevIndex === 0 ? banners.length - 1 : prevIndex - 1
     );
   };
-  
+
   const goToNext = () => {
-    setActiveIndex(prevIndex => 
+    setActiveIndex(prevIndex =>
       prevIndex === banners.length - 1 ? 0 : prevIndex + 1
     );
   };
-  
+
   // Auto-rotate banners every 5 seconds
   useEffect(() => {
     const intervalId = setInterval(() => {
       goToNext();
     }, 5000);
-    
+
     return () => clearInterval(intervalId);
   }, []);
-  
+
   return (
     <BannerContainer>
       {banners.map((banner, index) => (
@@ -232,10 +242,10 @@ const Banner: React.FC = () => {
           <BannerContent>
             <BannerTitle>{banner.title}</BannerTitle>
             <BannerSubtitle>{banner.subtitle}</BannerSubtitle>
-            <BannerButton 
-              variant="primary" 
-              size="lg" 
-              as="a" 
+            <BannerButton
+              variant="primary"
+              size="lg"
+              as="a"
               href={banner.ctaLink}
             >
               {banner.ctaText}
@@ -243,26 +253,26 @@ const Banner: React.FC = () => {
           </BannerContent>
         </BannerSlide>
       ))}
-      
-      <NavButton 
-        direction="left" 
+
+      <NavButton
+        direction="left"
         onClick={goToPrevious}
         aria-label="Slide anterior"
       >
         <ChevronLeft size={24} />
       </NavButton>
-      
-      <NavButton 
-        direction="right" 
+
+      <NavButton
+        direction="right"
         onClick={goToNext}
         aria-label="Próximo slide"
       >
         <ChevronRight size={24} />
       </NavButton>
-      
+
       <Indicators>
         {banners.map((banner, index) => (
-          <Indicator 
+          <Indicator
             key={banner.id}
             isActive={index === activeIndex}
             onClick={() => setActiveIndex(index)}
