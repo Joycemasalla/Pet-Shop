@@ -9,12 +9,14 @@ import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import ThankYouPage from './pages/ThankYouPage';
 import ScheduleServicePage from './pages/ScheduleServicePage';
+import ScrollToTopOnRouterChange from './components/animations/ScrollToTopOnRouteChange';
 
 function App() {
   return (
     <CartProvider>
       <Layout>
         <Routes>
+          <ScrollToTopOnRouterChange />
           <Route path="/" element={<HomePage />} />
           <Route path="/produtos" element={<ProductsPage />} />
           <Route path="/servicos" element={<ServicesPage />} />

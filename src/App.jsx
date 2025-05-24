@@ -10,11 +10,13 @@ import ContactPage from './pages/ContactPage';
 import ThankYouPage from './pages/ThankYouPage';
 import ScheduleServicePage from './pages/ScheduleServicePage';
 import UserProfile from './components/profile/UserProfile';
+import ScrollToTopOnRouterChange from './components/animations/ScrollToTopOnRouteChange';
 
 function App() {
   return (
     <CartProvider>
       <Layout>
+        <ScrollToTopOnRouterChange />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/produtos" element={<ProductsPage />} />

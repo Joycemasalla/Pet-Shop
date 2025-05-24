@@ -8,7 +8,7 @@ import Cart from '../cart/Cart';
 import MobileSidebar from './MobileSidebar';
 
 const HeaderContainer = styled.header`
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -29,7 +29,7 @@ const HeaderContent = styled.div`
 `;
 
 const Logo = styled(Link)`
-  font-size: ${props => props.theme.fontSizes.xl};
+  font-size: ${props => props.theme.fontSizes['3xl']};
   font-weight: ${props => props.theme.fontWeights.bold};
   color: ${props => props.theme.colors.primary[700]};
   text-decoration: none;
@@ -77,6 +77,11 @@ const CartCount = styled.span`
   justify-content: center;
 `;
 
+const HeaderSpacer = styled.div`
+ height: 80px; // ajuste conforme a altura real do seu Header fixo;
+`;
+
+
 const menuItems = [
   { path: '/', label: 'Início' },
   { path: '/produtos', label: 'Produtos' },
@@ -97,12 +102,14 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+
+
   return (
     <>
       <HeaderContainer isScrolled={isScrolled}>
         <HeaderContent>
           <Logo to="/">Agro Pet</Logo>
-          
+
           <ActionsContainer>
             <IconButton onClick={toggleCart} aria-label="Carrinho">
               <ShoppingCart size={24} />
@@ -110,15 +117,15 @@ const Header = () => {
                 <CartCount>{state.items.length}</CartCount>
               )}
             </IconButton>
-            
-            <IconButton 
-              as={Link} 
+
+            <IconButton
+              as={Link}
               to="/perfil"
               aria-label="Perfil"
             >
               <User size={24} />
             </IconButton>
-            
+
             <IconButton
               onClick={() => setIsMenuOpen(true)}
               aria-label="Menu"
@@ -128,14 +135,15 @@ const Header = () => {
           </ActionsContainer>
         </HeaderContent>
       </HeaderContainer>
-      
+
       <MobileSidebar
         isOpen={isMenuOpen}
         onClose={() => setIsMenuOpen(false)}
         menuItems={menuItems}
         currentPath={location.pathname}
       />
-      
+      <HeaderSpacer />
+
       {state.isOpen && <Cart />}
     </>
   );
