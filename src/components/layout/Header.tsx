@@ -210,7 +210,7 @@ const Header: React.FC = () => {
   }, [isMenuOpen]);
 
   const handleWhatsAppClick = () => {
-    window.open('https://wa.me/5532999999999?text=Olá! Gostaria de mais informações sobre a Agro Pet.', '_blank');
+    window.open('https://wa.me/5532988949994?text=Olá! Gostaria de mais informações sobre a Agro Pet.', '_blank');
   };
 
   return (
